@@ -2,761 +2,600 @@
 <html lang="ru">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Пропал украинский гений квантовых технологий — новость</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Пропал украинский гений квантовых технологий — NY News</title>
     <meta
       name="description"
-      content="Пропал украинский гений квантовых технологий: загадочное исчезновение Сисяна Олександра в Канаде"
+      content="Загадочное исчезновение Сисяна Олександра в Канаде: факты и анализ."
     />
+    
     <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Merriweather:ital,wght@0,300;0,700;0,900;1,300&display=swap"
       rel="stylesheet"
     />
+
     <style>
       :root {
-        --bg: #f6f7fb;
-        --card: #ffffff;
-        --muted: #68707a;
-        --accent: #0b63ff;
-        --accent-2: #0aa66f;
-        --shadow: 0 6px 24px rgba(35, 47, 60, 0.08);
-        --radius: 14px;
-        --max-width: 900px;
+        /* Светлая тема */
+        --bg-color: #f8f9fa;
+        --bg-gradient: radial-gradient(circle at 50% 0%, #eef2f6 0%, #ffffff 100%);
+        --text-main: #1a1a1a;
+        --text-muted: #666666;
+        --accent: #2563eb; /* Royal Blue */
+        --accent-glow: rgba(37, 99, 235, 0.3);
+        --card-bg: rgba(255, 255, 255, 0.85);
+        --card-border: rgba(255, 255, 255, 0.6);
+        --shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.08);
+        --font-body: "Inter", sans-serif;
+        --font-heading: "Merriweather", serif;
+        --radius: 16px;
+        --max-width: 780px; /* Чуть уже для лучшей читаемости */
       }
+
       [data-theme="dark"] {
-        --bg: #0b0f14;
-        --card: #0f1720;
-        --muted: #9aa6b2;
-        --accent: #4ea1ff;
-        --accent-2: #2fd19b;
-        --shadow: 0 8px 32px rgba(2, 6, 23, 0.6);
+        /* Тёмная тема */
+        --bg-color: #0f1115;
+        --bg-gradient: radial-gradient(circle at 50% 0%, #1a1d26 0%, #0f1115 100%);
+        --text-main: #e2e2e2;
+        --text-muted: #9ca3af;
+        --accent: #60a5fa;
+        --accent-glow: rgba(96, 165, 250, 0.2);
+        --card-bg: rgba(20, 22, 28, 0.7);
+        --card-border: rgba(255, 255, 255, 0.08);
+        --shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
       }
 
-      html,
+      * { box-sizing: border-box; }
+
+      html { scroll-behavior: smooth; }
+
       body {
-        height: 100%;
         margin: 0;
-        font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto,
-          "Helvetica Neue", Arial;
-        background: linear-gradient(180deg, var(--bg), rgba(0, 0, 0, 0));
-        color: #0b1220;
+        background: var(--bg-color);
+        background-image: var(--bg-gradient);
+        background-attachment: fixed;
+        color: var(--text-main);
+        font-family: var(--font-body);
+        line-height: 1.7;
         -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        line-height: 1.55;
-      }
-      [data-theme="dark"] body {
-        color: #e6eef6;
+        transition: background 0.5s ease, color 0.5s ease;
+        overflow-x: hidden;
       }
 
-      /* Top progress bar while reading */
+      /* Прогресс-бар чтения */
       #progress {
         position: fixed;
         top: 0;
         left: 0;
-        height: 4px;
+        height: 3px;
         width: 0%;
-        background: linear-gradient(90deg, var(--accent), var(--accent-2));
-        z-index: 1200;
-        transition: width 120ms linear;
+        background: var(--accent);
+        z-index: 2000;
+        box-shadow: 0 0 10px var(--accent);
+        transition: width 0.1s linear;
       }
 
+      /* Анимация появления контента */
+      .fade-in-up {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+      .fade-in-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Контейнер */
       .container {
         max-width: var(--max-width);
-        margin: 36px auto;
-        padding: 24px;
+        margin: 0 auto;
+        padding: 40px 20px 80px;
+        position: relative;
       }
 
+      /* Шапка (липкая) */
       header.news-header {
         display: flex;
-        gap: 18px;
         align-items: center;
-        margin-bottom: 18px;
+        justify-content: space-between;
+        margin-bottom: 40px;
+        padding: 12px 20px;
+        position: sticky;
+        top: 20px;
+        z-index: 1000;
+        
+        /* Эффект матового стекла */
+        background: var(--card-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--card-border);
+        border-radius: 999px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+        transition: all 0.3s ease;
       }
 
-      .logo {
-        width: 68px;
-        height: 68px;
-        border-radius: 12px;
-        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        letter-spacing: -0.02em;
+      }
+
+      .logo-circle {
+        width: 32px;
+        height: 32px;
+        background: var(--accent);
+        border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
         color: white;
-        font-weight: 700;
-        box-shadow: var(--shadow);
-        flex-shrink: 0;
+        font-size: 0.8rem;
+        font-family: var(--font-heading);
       }
 
-      .site-meta {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-      }
-      .site-name {
-        font-weight: 700;
-        font-size: 1.05rem;
-      }
-      .site-tagline {
-        font-size: 0.87rem;
-        color: var(--muted);
-      }
-
-      .toolbar {
-        margin-left: auto;
-        display: flex;
-        gap: 10px;
+      .live-badge {
+        display: inline-flex;
         align-items: center;
+        gap: 6px;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        font-weight: 800;
+        color: #e11d48;
+        margin-left: 10px;
+        letter-spacing: 0.05em;
       }
-      .btn {
+      
+      .live-dot {
+        width: 8px;
+        height: 8px;
+        background-color: #e11d48;
+        border-radius: 50%;
+        animation: pulse 1.5s infinite;
+      }
+
+      @keyframes pulse {
+        0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(225, 29, 72, 0.7); }
+        70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(225, 29, 72, 0); }
+        100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(225, 29, 72, 0); }
+      }
+
+      .theme-toggle {
         background: transparent;
-        border: 1px solid rgba(11, 19, 32, 0.06);
-        padding: 8px 12px;
-        border-radius: 10px;
-        font-weight: 600;
+        border: none;
         cursor: pointer;
-        box-shadow: var(--shadow);
-        backdrop-filter: blur(4px);
+        color: var(--text-main);
+        padding: 8px;
+        border-radius: 50%;
+        transition: background 0.2s;
       }
-      [data-theme="dark"] .btn {
-        border-color: rgba(255, 255, 255, 0.06);
+      .theme-toggle:hover {
+        background: rgba(128,128,128, 0.1);
+      }
+      .theme-toggle svg {
+        width: 20px;
+        height: 20px;
+        fill: currentColor;
       }
 
+      /* Основная карточка */
       main.card {
-        background: var(--card);
-        border-radius: var(--radius);
-        padding: 24px;
-        box-shadow: var(--shadow);
-        overflow: hidden;
+        /* Убираем фон карточки, делаем "чистый" лист для текста */
+        /* Но можно добавить легкий фон, если хочется */
       }
 
-      .eyebrow {
+      /* Заголовок статьи */
+      .article-header {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .category {
+        color: var(--accent);
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 16px;
         display: inline-block;
-        font-size: 0.82rem;
-        color: var(--muted);
-        margin-bottom: 12px;
       }
 
       h1.title {
-        margin: 0 0 8px 0;
-        font-size: 1.6rem;
-        line-height: 1.12;
-        letter-spacing: -0.01em;
-      }
-      .byline {
-        color: var(--muted);
-        font-size: 0.92rem;
-        margin-bottom: 18px;
-        display: flex;
-        gap: 8px;
-        align-items: center;
-        flex-wrap: wrap;
-      }
-      .meta-pill {
-        background: rgba(11, 19, 32, 0.04);
-        padding: 6px 10px;
-        border-radius: 999px;
-        font-weight: 600;
-        font-size: 0.85rem;
-      }
-      [data-theme="dark"] .meta-pill {
-        background: rgba(255, 255, 255, 0.03);
+        font-family: var(--font-heading);
+        font-size: clamp(2rem, 5vw, 3rem); /* Адаптивный размер */
+        line-height: 1.15;
+        margin: 0 0 24px 0;
+        font-weight: 900;
+        letter-spacing: -0.02em;
+        color: var(--text-main);
       }
 
-      .hero {
-        width: 100%;
-        height: 300px;
-        border-radius: 12px;
-        overflow: hidden;
-        margin-bottom: 18px;
+      .meta {
         display: flex;
-        align-items: center;
         justify-content: center;
-        background: linear-gradient(
-          135deg,
-          rgba(11, 99, 255, 0.12),
-          rgba(10, 166, 111, 0.08)
-        );
-        position: relative;
-      }
-      .hero svg {
-        width: 90%;
-        height: 90%;
-        opacity: 0.14;
-      }
-
-      article.content {
-        font-size: 1.02rem;
-        color: inherit;
-      }
-      article.content p {
-        margin: 14px 0;
-      }
-      article.content h2 {
-        margin-top: 20px;
-        font-size: 1.15rem;
-      }
-
-      .read-stats {
-        display: flex;
-        gap: 12px;
-        align-items: center;
-        margin-top: 12px;
-        margin-bottom: 18px;
-        color: var(--muted);
-        font-weight: 600;
-      }
-
-      .share {
-        margin-top: 20px;
-        display: flex;
-        gap: 8px;
-        flex-wrap: wrap;
-      }
-      .share .btn {
-        font-size: 0.9rem;
-        padding: 8px 10px;
-      }
-
-      footer.article-footer {
-        margin-top: 28px;
-        display: flex;
-        justify-content: space-between;
         gap: 20px;
-        align-items: center;
-        flex-wrap: wrap;
-      }
-      .contact {
-        color: var(--muted);
-        font-size: 0.95rem;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        border-top: 1px solid rgba(128,128,128, 0.15);
+        border-bottom: 1px solid rgba(128,128,128, 0.15);
+        padding: 16px 0;
+        margin-bottom: 32px;
       }
 
-      /* comments mock */
-      #comments {
-        margin-top: 28px;
-        border-top: 1px dashed rgba(11, 19, 32, 0.06);
-        padding-top: 18px;
-      }
-      .comment-form textarea {
+      /* Геро-изображение (Квантовая анимация) */
+      .hero-visual {
         width: 100%;
-        min-height: 78px;
-        padding: 12px;
-        border-radius: 10px;
-        border: 1px solid rgba(11, 19, 32, 0.06);
-        resize: vertical;
-        background: transparent;
-        color: inherit;
+        height: 360px;
+        border-radius: var(--radius);
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 40px;
+        background: linear-gradient(135deg, #000000, #111827);
+        box-shadow: var(--shadow);
       }
-      .comment-list {
-        margin-top: 16px;
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
+      
+      /* CSS Анимация "Квантовое поле" */
+      .quantum-orb {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        filter: blur(40px);
+        opacity: 0.6;
+        animation: orb-breathe 6s ease-in-out infinite;
       }
-      .comment {
-        background: linear-gradient(180deg, rgba(0, 0, 0, 0.01), transparent);
-        padding: 12px;
-        border-radius: 10px;
-        border: 1px solid rgba(11, 19, 32, 0.03);
+      .quantum-ring {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 260px;
+        height: 260px;
+        border: 1px solid rgba(255,255,255,0.3);
+        border-radius: 50%;
+        transform: translate(-50%, -50%) rotate(0deg);
+        animation: ring-spin 10s linear infinite;
+      }
+      .quantum-ring::before {
+        content: '';
+        position: absolute;
+        top: -4px; left: 50%;
+        width: 8px; height: 8px;
+        background: white;
+        border-radius: 50%;
+        box-shadow: 0 0 10px white;
+      }
+      .quantum-ring:nth-child(3) {
+        width: 180px; height: 180px;
+        border-color: rgba(255,255,255,0.15);
+        animation-duration: 7s;
+        animation-direction: reverse;
       }
 
-      /* small screens */
-      @media (max-width: 720px) {
-        .hero {
-          height: 200px;
-        }
-        header.news-header {
-          gap: 12px;
-        }
-        .logo {
-          width: 56px;
-          height: 56px;
-        }
+      @keyframes orb-breathe {
+        0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+        50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
+      }
+      @keyframes ring-spin {
+        100% { transform: translate(-50%, -50%) rotate(360deg); }
       }
 
-      /* print styles */
-      @media print {
-        body {
-          background: white;
-          color: black;
-        }
-        .toolbar,
-        .share,
-        .comment-form,
-        #progress,
-        footer.article-footer {
-          display: none !important;
-        }
-        main.card {
-          box-shadow: none;
-          border-radius: 0;
-          padding: 0;
-        }
+      /* Текст статьи */
+      article.content {
+        font-size: 1.125rem; /* 18px */
+        color: var(--text-main);
+      }
+      
+      article.content p {
+        margin-bottom: 1.8em;
+      }
+      
+      /* Первая буква (Буквица) */
+      article.content > p:first-of-type::first-letter {
+        float: left;
+        font-family: var(--font-heading);
+        font-size: 3.8em;
+        line-height: 0.8;
+        margin-right: 12px;
+        color: var(--accent);
+        font-weight: 700;
+      }
+
+      article.content h2 {
+        font-family: var(--font-heading);
+        font-size: 1.6rem;
+        margin-top: 2.5em;
+        margin-bottom: 1em;
+        color: var(--text-main);
+        position: relative;
+        padding-left: 20px;
+      }
+      
+      /* Декор заголовков */
+      article.content h2::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 6px;
+        bottom: 6px;
+        width: 4px;
+        background: var(--accent);
+        border-radius: 2px;
+      }
+
+      article.content ul {
+        padding-left: 20px;
+        margin-bottom: 2em;
+        list-style: none;
+      }
+      article.content ul li {
+        position: relative;
+        padding-left: 24px;
+        margin-bottom: 12px;
+      }
+      article.content ul li::before {
+        content: '—';
+        position: absolute;
+        left: 0;
+        color: var(--accent);
+        font-weight: bold;
+      }
+
+      /* Футер статьи */
+      .article-footer {
+        margin-top: 60px;
+        padding: 30px;
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: var(--radius);
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .action-btn {
+        background: var(--text-main);
+        color: var(--bg-color);
+        border: none;
+        padding: 14px 28px;
+        font-size: 1rem;
+        font-weight: 600;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .action-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+      }
+      [data-theme="dark"] .action-btn {
+        background: var(--accent);
+        color: white;
+      }
+
+      /* Адаптивность */
+      @media (max-width: 600px) {
+        .container { padding: 20px 16px 60px; }
+        h1.title { font-size: 1.8rem; }
+        .hero-visual { height: 240px; }
+        .meta { flex-direction: column; gap: 8px; text-align: center; }
       }
     </style>
   </head>
   <body>
-    <div id="progress" aria-hidden="true"></div>
+    <div id="progress"></div>
 
     <div class="container">
-      <header class="news-header" role="banner">
-        <div class="logo" aria-hidden="true">NY</div>
-        <div class="site-meta">
-          <div class="site-name">СИСЯН</div>
-          <div class="site-tagline">Независимые новости — факты и анализ</div>
+      
+      <header class="news-header fade-in-up">
+        <div class="brand">
+          <div class="logo-circle">N</div>
+          <span>NY News</span>
+          <div class="live-badge">
+            <span class="live-dot"></span>
+            LIVE
+          </div>
         </div>
-
-        <div class="toolbar" role="toolbar" aria-label="Инструменты статьи">
-          <button id="toggleTheme" class="btn" title="Переключить тёмную тему">
-            Тёмная тема
-          </button>
-          <button id="printBtn" class="btn" title="Печать этой страницы">
-            Печать
-          </button>
-        </div>
+        
+        <button id="toggleTheme" class="theme-toggle" title="Переключить тему">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/>
+          </svg>
+        </button>
       </header>
 
-      <main class="card" role="main" aria-labelledby="article-title">
-        <div class="eyebrow">Происшествия / Наука</div>
-        <h1 id="article-title" class="title">
-          Пропал украинский гений квантовых технологий: загадочное исчезновение
-          Сисяна Олександра в Канаде
-        </h1>
+      <main class="card">
+        
+        <header class="article-header fade-in-up">
+          <span class="category">Наука / Происшествия</span>
+          <h1 class="title">
+            Пропал украинский гений квантовых технологий: загадочное исчезновение Сисяна Олександра
+          </h1>
+          
+          <div class="meta">
+            <span id="publishedDate">14 ноября, Квебек</span>
+            <span id="readTime">3 мин чтения</span>
+          </div>
+        </header>
 
-        <div class="byline">
-          <span class="meta-pill">Квебек, Канада</span>
-          <span
-            >Опубликовано:
-            <time id="published" datetime="">14 ноября</time></span
-          >
-          <span class="meta-pill" id="readingTime">—</span>
+        <div class="hero-visual fade-in-up">
+          <div class="quantum-orb"></div>
+          <div class="quantum-ring"></div>
+          <div class="quantum-ring"></div>
         </div>
 
-        <div
-          class="hero"
-          role="img"
-          aria-label="Иллюстрация — лаборатория и технологии"
-        >
-          <!-- декоративный SVG -->
-          <svg
-            viewBox="0 0 800 500"
-            preserveAspectRatio="xMidYMid meet"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
-          >
-            <g transform="translate(50,50)">
-              <rect
-                x="0"
-                y="0"
-                width="700"
-                height="350"
-                rx="18"
-                fill="white"
-                opacity="0.02"
-              />
-              <path
-                d="M20 260 C180 120 360 340 520 160"
-                stroke="black"
-                stroke-width="2"
-                fill="none"
-                opacity="0.06"
-              />
-              <circle cx="200" cy="150" r="48" opacity="0.06" />
-              <rect
-                x="420"
-                y="80"
-                width="180"
-                height="120"
-                rx="10"
-                opacity="0.06"
-              ></rect>
-            </g>
-          </svg>
-        </div>
+        <article class="content">
+          <div class="fade-in-up">
+            <p>
+              <strong>Квебек, Канада</strong> — Канадское научное сообщество потрясено
+              исчезновением 27-летнего украинского инженера-физика Сисяна
+              Олександра — уроженца небольшого села на западе Украины, который
+              всего за несколько лет успел стать одним из самых ярких новаторов в
+              области квантовых вычислений.
+            </p>
 
-        <div class="read-stats" aria-hidden="true">
-          <div id="wordCount">Слов: —</div>
-          <div id="charCount">Симв: —</div>
-        </div>
+            <p>
+              По данным канадской полиции, молодой учёный исчез ночью 14 ноября,
+              покинув лабораторный кампус Университета Лаваля. Последние записи с
+              камер наблюдения фиксируют, как он в одиночку выходит из корпуса
+              исследований криогенных систем. С тех пор его следов не найдено.
+            </p>
+          </div>
 
-        <article class="content" id="articleContent" tabindex="0">
-          <p>
-            Пропал украинский гений квантовых технологий: загадочное
-            исчезновение Сисяна Олександра в Канаде
-          </p>
+          <div class="fade-in-up">
+            <h2>От сельского хлопца — к мировому прорыву</h2>
+            <p>
+              Сисян Олександр вырос в обычном украинском селе, где, по словам
+              знакомых, больше говорили о бытовых заботах, чем о кубитах. Но ещё
+              школьником он удивлял учителей самодельными приборами, собранными из
+              старой электроники.
+            </p>
+            <p>
+              После переезда в Канаду по научной программе он быстро стал
+              известным в узких кругах разработчиков квантового «железа». Причиной
+              стало его революционное изобретение — криогенный усилитель нового
+              поколения.
+            </p>
+          </div>
 
-          <p>
-            Квебек, Канада — Канадское научное сообщество потрясено
-            исчезновением 27-летнего украинского инженера-физика Сисяна
-            Олександра — уроженца небольшого села на западе Украины, который
-            всего за несколько лет успел стать одним из самых ярких новаторов в
-            области квантовых вычислений.
-          </p>
+          <div class="fade-in-up">
+            <p>
+              Разработанное им устройство — <em>traveling-wave parametric amplifier
+              (TWPA)</em> — оказалось способно генерировать тепла в 10 000 раз меньше,
+              чем стандартные усилители, используемые в квантовых компьютерах.
+              Для отрасли это стало огромным прорывом: квантовые системы требуют
+              сверхнизких температур, и лишнее тепло традиционно тормозит их
+              масштабирование.
+            </p>
+          </div>
 
-          <p>
-            По данным канадской полиции, молодой учёный исчез ночью 14 ноября,
-            покинув лабораторный кампус Университета Лаваля. Последние записи с
-            камер наблюдения фиксируют, как он в одиночку выходит из корпуса
-            исследований криогенных систем. С тех пор его следов не найдено.
-          </p>
+          <div class="fade-in-up">
+            <h2>Накануне исчезновения</h2>
+            <p>
+              По словам сотрудников лаборатории, в последние недели учёный
+              выглядел сильно уставшим и говорил, что опасается «давления извне».
+              Однако, что он имел в виду, так и осталось неизвестным. Ночью перед исчезновением Сисян работал над новой серией испытаний.
+            </p>
+          </div>
 
-          <h2>От сельского хлопца — к мировому прорыву</h2>
+          <div class="fade-in-up">
+            <h2>Версии следствия</h2>
+            <p>Полиция рассматривает несколько сценариев:</p>
+            <ul>
+              <li>Самовольный уход по личным причинам;</li>
+              <li>Несчастный случай на территории обширного кампуса;</li>
+              <li>Вмешательство третьих лиц (промышленный шпионаж).</li>
+            </ul>
+          </div>
 
-          <p>
-            Сисян Олександр вырос в обычном украинском селе, где, по словам
-            знакомых, больше говорили о картофеле, чем о кубитах. Но ещё
-            школьником он удивлял учителей самодельными приборами, собранными из
-            старой электроники.
-          </p>
-
-          <p>
-            После переезда в Канаду по научной программе он быстро стал
-            известным в узких кругах разработчиков квантового «железа». Причиной
-            стало его революционное изобретение — криогенный усилитель нового
-            поколения.
-          </p>
-
-          <p>
-            Разработанное им устройство — traveling-wave parametric amplifier
-            (TWPA) — оказалось способно генерировать тепла в 10 000 раз меньше,
-            чем стандартные усилители, используемые в квантовых компьютерах.
-          </p>
-
-          <p>
-            Для отрасли это стало огромным прорывом: квантовые системы требуют
-            сверхнизких температур, и лишнее тепло традиционно тормозит их
-            масштабирование.
-          </p>
-
-          <p>
-            Коллеги называли его проект «самой многообещающей разработкой для
-            перехода от десятков кубитов к тысячам».
-          </p>
-
-          <h2>Накануне исчезновения</h2>
-
-          <p>
-            По словам сотрудников лаборатории, в последние недели учёный
-            выглядел сильно уставшим и говорил, что опасается «давления извне».
-            Однако, что он имел в виду, так и осталось неизвестным.
-          </p>
-
-          <p>
-            Ночью перед исчезновением Сисян работал над новой серией испытаний
-            TWPA-усилителя. В лаборатории позже обнаружили его ноутбук,
-            оставленный включённым, и недописанный технический отчёт.
-          </p>
-
-          <h2>Версии следствия</h2>
-
-          <p>Полиция рассматривает несколько возможных сценариев:</p>
-
-          <ul>
-            <li>самовольный уход;</li>
-            <li>несчастный случай на территории кампуса;</li>
-            <li>вмешательство третьих лиц, связанное с его научной работой.</li>
-          </ul>
-
-          <p>Официальных комментариев о ходе расследования пока нет.</p>
-
-          <h2>Международный отклик</h2>
-
-          <p>
-            Новость об исчезновении быстро разлетелась по научным лабораториям
-            от Цюриха до Сан-Франциско. Учёные выражают тревогу — в том числе
-            из-за того, что проект Сисяна имел серьёзное коммерческое значение.
-          </p>
-
-          <p>
-            Некоторые исследователи даже назвали TWPA-усилитель «слишком ценным,
-            чтобы его автор мог просто исчезнуть».
-          </p>
-
-          <h2>Надежда остаётся</h2>
-
-          <p>
-            Семья в Украине и коллеги в Канаде призывают всех, кто может
-            обладать любой информацией, связаться с властями. Несмотря на
-            отсутствие новых данных, поиски продолжаются.
-          </p>
+          <div class="fade-in-up">
+            <h2>Международный резонанс</h2>
+            <p>
+              Новость об исчезновении быстро разлетелась по научным лабораториям
+              от Цюриха до Сан-Франциско. Учёные выражают тревогу — проект Сисяна имеет колоссальное коммерческое значение. Некоторые исследователи назвали TWPA-усилитель «слишком ценным, чтобы его автор мог просто исчезнуть».
+            </p>
+          </div>
         </article>
 
-        <div class="share" aria-label="Поделиться">
-          <button class="btn" id="shareBtn">
-            Поделиться (копировать ссылку)
+        <footer class="article-footer fade-in-up">
+          <h3>Есть информация?</h3>
+          <p style="color: var(--text-muted); margin-bottom: 20px;">
+            Гарантируется полная анонимность. Свяжитесь с редакцией или полицией.
+          </p>
+          <button class="action-btn" id="shareBtn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+              <polyline points="16 6 12 2 8 6"></polyline>
+              <line x1="12" y1="2" x2="12" y2="15"></line>
+            </svg>
+            Поделиться новостью
           </button>
-          <button class="btn" id="reportBtn">Сообщить: есть информация</button>
-        </div>
-
-        <footer class="article-footer" role="contentinfo">
-          <div class="contact">
-            Если у вас есть информация — свяжитесь с местной полицией или
-            Сообщите по горячей линии университета.
-          </div>
-          <div class="tags" aria-hidden="true">
-            <span class="meta-pill">Квантовые технологии</span>
-            <span class="meta-pill">Исчезновение</span>
-          </div>
         </footer>
 
-        <section id="comments" aria-labelledby="commentsTitle">
-          <h3 id="commentsTitle">Комментарии</h3>
-          <div class="comment-form" aria-label="Форма комментариев">
-            <label
-              for="commentText"
-              style="
-                display: block;
-                margin-bottom: 8px;
-                color: var(--muted);
-                font-weight: 600;
-              "
-              >Оставить комментарий (локально)</label
-            >
-            <textarea
-              id="commentText"
-              placeholder="Ваш комментарий..."
-              aria-describedby="commentHint"
-            ></textarea>
-            <div style="display: flex; gap: 8px; margin-top: 8px">
-              <button id="addComment" class="btn">Добавить</button>
-              <button
-                id="clearComments"
-                class="btn"
-                title="Очистить локальные комментарии"
-              >
-                Очистить
-              </button>
-            </div>
-            <div
-              id="commentHint"
-              style="margin-top: 8px; color: var(--muted); font-size: 0.9rem"
-            >
-              Комментарии сохраняются только в вашем браузере.
-            </div>
-          </div>
-
-          <div class="comment-list" id="commentList" aria-live="polite"></div>
-        </section>
       </main>
     </div>
 
     <script>
-      // --- Inserted text taken verbatim from user; we compute stats and enable UI ---
-      (function () {
-        const article = document.getElementById("articleContent");
-        const text = article.innerText || article.textContent;
-        const words = countWords(text);
-        const chars = text.length;
-        const wpm = 220; // conservative reading speed
-        const minutes = Math.max(1, Math.round(words / wpm));
-
-        document.getElementById("wordCount").textContent = "Слов: " + words;
-        document.getElementById("charCount").textContent = "Симв: " + chars;
-        document.getElementById("readingTime").textContent =
-          "≈ " + minutes + " мин чтения";
-        // set published date text to absolute date if present (user text mentions 14 ноября)
-        const pubEl = document.getElementById("published");
-        // set explicit date to 14 ноября текущего года if possible
-        const now = new Date();
-        const year = now.getFullYear();
-        pubEl.textContent = "14 ноября " + year;
-
-        // progress bar
-        const progress = document.getElementById("progress");
-        window.addEventListener("scroll", function () {
-          const docH =
-            document.documentElement.scrollHeight - window.innerHeight;
-          const scrolled = (window.scrollY / (docH || 1)) * 100;
-          progress.style.width = Math.min(100, Math.max(0, scrolled)) + "%";
-        });
-
-        // theme toggle (persist in localStorage)
-        const root = document.documentElement;
-        const themeBtn = document.getElementById("toggleTheme");
-        const saved = localStorage.getItem("ny:theme");
-        if (saved === "dark") root.setAttribute("data-theme", "dark");
-        updateThemeBtn();
-
-        themeBtn.addEventListener("click", function () {
-          if (root.getAttribute("data-theme") === "dark") {
-            root.removeAttribute("data-theme");
-            localStorage.removeItem("ny:theme");
-          } else {
-            root.setAttribute("data-theme", "dark");
-            localStorage.setItem("ny:theme", "dark");
-          }
-          updateThemeBtn();
-        });
-        function updateThemeBtn() {
-          const t =
-            root.getAttribute("data-theme") === "dark"
-              ? "Светлая тема"
-              : "Тёмная тема";
-          themeBtn.textContent = t;
-        }
-
-        // print
-        document
-          .getElementById("printBtn")
-          .addEventListener("click", function () {
-            window.print();
-          });
-
-        // share -> copy link (works locally)
-        document
-          .getElementById("shareBtn")
-          .addEventListener("click", function () {
-            const url = location.href;
-            copyText(url);
-            showToast("Ссылка скопирована в буфер обмена");
-          });
-
-        // report button (opens mailto with subject)
-        document
-          .getElementById("reportBtn")
-          .addEventListener("click", function () {
-            const subject = encodeURIComponent(
-              "Информация по исчезновению Сисяна Олександра"
-            );
-            const body = encodeURIComponent(
-              "Я хотел(а) бы сообщить следующую информацию:\n\n(введите здесь детали)"
-            );
-            location.href = `mailto:info@example.com?subject=${subject}&body=${body}`;
-          });
-
-        // comments (localStorage)
-        const commentInput = document.getElementById("commentText");
-        const addBtn = document.getElementById("addComment");
-        const clearBtn = document.getElementById("clearComments");
-        const commentList = document.getElementById("commentList");
-        const storageKey = "ny:comments:v1";
-
-        function renderComments() {
-          const items = loadComments();
-          commentList.innerHTML = "";
-          if (items.length === 0) {
-            commentList.innerHTML =
-              '<div style="color:var(--muted)">Пока нет комментариев.</div>';
-            return;
-          }
-          items.forEach((c) => {
-            const el = document.createElement("div");
-            el.className = "comment";
-            el.innerHTML = `<div style="font-weight:700;font-size:0.95rem;margin-bottom:6px;">${escapeHtml(
-              c.name
-            )}</div>
-                          <div style="font-size:0.95rem;white-space:pre-wrap;">${escapeHtml(
-                            c.text
-                          )}</div>
-                          <div style="margin-top:8px;color:var(--muted);font-size:0.85rem;">${new Date(
-                            c.time
-                          ).toLocaleString()}</div>`;
-            commentList.appendChild(el);
-          });
-        }
-
-        addBtn.addEventListener("click", function () {
-          const text = commentInput.value.trim();
-          if (!text) {
-            showToast("Введите комментарий");
-            commentInput.focus();
-            return;
-          }
-          const items = loadComments();
-          items.unshift({
-            name: "Читатель",
-            text,
-            time: new Date().toISOString(),
-          });
-          localStorage.setItem(storageKey, JSON.stringify(items));
-          commentInput.value = "";
-          renderComments();
-          showToast("Комментарий добавлен (локально)");
-        });
-
-        clearBtn.addEventListener("click", function () {
-          localStorage.removeItem(storageKey);
-          renderComments();
-          showToast("Комментарии удалены");
-        });
-
-        function loadComments() {
-          try {
-            const raw = localStorage.getItem(storageKey) || "[]";
-            return JSON.parse(raw);
-          } catch (e) {
-            return [];
-          }
-        }
-
-        renderComments();
-
-        // small utility functions
-        function countWords(str) {
-          // count words conservatively — consider sequences of letters/digits as words
-          return (str.match(/\p{L}[\p{L}\p{N}'’-]*/gu) || []).length;
-        }
-        function copyText(t) {
-          if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(t).catch(() => fallbackCopy(t));
-          } else {
-            fallbackCopy(t);
-          }
-        }
-        function fallbackCopy(text) {
-          const ta = document.createElement("textarea");
-          ta.value = text;
-          document.body.appendChild(ta);
-          ta.select();
-          try {
-            document.execCommand("copy");
-          } catch (e) {}
-          ta.remove();
-        }
-
-        // simple toast
-        let toastTimer = null;
-        function showToast(msg) {
-          const id = "nyToast";
-          let el = document.getElementById(id);
-          if (!el) {
-            el = document.createElement("div");
-            el.id = id;
-            el.style.position = "fixed";
-            el.style.right = "18px";
-            el.style.bottom = "18px";
-            el.style.padding = "12px 16px";
-            el.style.borderRadius = "12px";
-            el.style.boxShadow = "0 6px 20px rgba(2,6,23,0.2)";
-            el.style.background =
-              "linear-gradient(90deg, rgba(11,99,255,0.95), rgba(10,166,111,0.95))";
-            el.style.color = "white";
-            el.style.fontWeight = 700;
-            el.style.zIndex = 2000;
-            document.body.appendChild(el);
-          }
-          el.textContent = msg;
-          el.style.opacity = "1";
-          if (toastTimer) clearTimeout(toastTimer);
-          toastTimer = setTimeout(() => {
-            el.style.opacity = "0";
-          }, 2600);
-        }
-
-        function escapeHtml(s) {
-          return s
-            .replaceAll("&", "&amp;")
-            .replaceAll("<", "&lt;")
-            .replaceAll(">", "&gt;");
-        }
-
-        // accessibility: allow pressing Ctrl+P to print
-        window.addEventListener("keydown", function (e) {
-          if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "p") {
-            window.print();
+      // --- Логика интерфейса ---
+      
+      // 1. Анимация при скролле (Intersection Observer)
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px"
+      };
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target); // Анимируем только один раз
           }
         });
-      })();
+      }, observerOptions);
+
+      document.querySelectorAll('.fade-in-up').forEach(el => {
+        observer.observe(el);
+      });
+
+      // 2. Прогресс бар
+      const progressBar = document.getElementById("progress");
+      window.addEventListener("scroll", () => {
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrolled = (window.scrollY / docHeight) * 100;
+        progressBar.style.width = `${scrolled}%`;
+      });
+
+      // 3. Переключение темы
+      const themeBtn = document.getElementById("toggleTheme");
+      const html = document.documentElement;
+      
+      // Проверка сохраненной темы
+      if(localStorage.getItem("theme") === "dark") {
+        html.setAttribute("data-theme", "dark");
+      }
+
+      themeBtn.addEventListener("click", () => {
+        if (html.getAttribute("data-theme") === "dark") {
+          html.removeAttribute("data-theme");
+          localStorage.setItem("theme", "light");
+        } else {
+          html.setAttribute("data-theme", "dark");
+          localStorage.setItem("theme", "dark");
+        }
+      });
+
+      // 4. Кнопка поделиться
+      document.getElementById("shareBtn").addEventListener("click", async () => {
+        const shareData = {
+          title: document.title,
+          text: 'Загадочное исчезновение гения квантовых технологий.',
+          url: window.location.href
+        };
+        
+        if (navigator.share) {
+            try { await navigator.share(shareData); } catch(e) {}
+        } else {
+            // Fallback: копирование в буфер
+            navigator.clipboard.writeText(window.location.href);
+            alert("Ссылка скопирована!");
+        }
+      });
+      
+      // 5. Установка текущего года
+      const year = new Date().getFullYear();
+      document.getElementById("publishedDate").innerText = `14 ноября ${year}, Квебек`;
+
     </script>
   </body>
 </html>
