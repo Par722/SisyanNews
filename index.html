@@ -8,7 +8,6 @@
       name="description"
       content="Загадочное исчезновение Сисяна Олександра в Канаде: факты и анализ."
     />
-    
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -18,24 +17,23 @@
 
     <style>
       :root {
-        /* Светлая тема */
         --bg-color: #f8f9fa;
         --bg-gradient: radial-gradient(circle at 50% 0%, #eef2f6 0%, #ffffff 100%);
         --text-main: #1a1a1a;
         --text-muted: #666666;
-        --accent: #2563eb; /* Royal Blue */
+        --accent: #2563eb;
         --accent-glow: rgba(37, 99, 235, 0.3);
         --card-bg: rgba(255, 255, 255, 0.85);
         --card-border: rgba(255, 255, 255, 0.6);
+        --input-bg: #ffffff;
         --shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.08);
         --font-body: "Inter", sans-serif;
         --font-heading: "Merriweather", serif;
         --radius: 16px;
-        --max-width: 780px; /* Чуть уже для лучшей читаемости */
+        --max-width: 780px;
       }
 
       [data-theme="dark"] {
-        /* Тёмная тема */
         --bg-color: #0f1115;
         --bg-gradient: radial-gradient(circle at 50% 0%, #1a1d26 0%, #0f1115 100%);
         --text-main: #e2e2e2;
@@ -44,6 +42,7 @@
         --accent-glow: rgba(96, 165, 250, 0.2);
         --card-bg: rgba(20, 22, 28, 0.7);
         --card-border: rgba(255, 255, 255, 0.08);
+        --input-bg: #1a1d26;
         --shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
       }
 
@@ -64,7 +63,6 @@
         overflow-x: hidden;
       }
 
-      /* Прогресс-бар чтения */
       #progress {
         position: fixed;
         top: 0;
@@ -77,7 +75,6 @@
         transition: width 0.1s linear;
       }
 
-      /* Анимация появления контента */
       .fade-in-up {
         opacity: 0;
         transform: translateY(30px);
@@ -88,7 +85,6 @@
         transform: translateY(0);
       }
 
-      /* Контейнер */
       .container {
         max-width: var(--max-width);
         margin: 0 auto;
@@ -96,7 +92,6 @@
         position: relative;
       }
 
-      /* Шапка (липкая) */
       header.news-header {
         display: flex;
         align-items: center;
@@ -106,8 +101,6 @@
         position: sticky;
         top: 20px;
         z-index: 1000;
-        
-        /* Эффект матового стекла */
         background: var(--card-bg);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
@@ -183,13 +176,6 @@
         fill: currentColor;
       }
 
-      /* Основная карточка */
-      main.card {
-        /* Убираем фон карточки, делаем "чистый" лист для текста */
-        /* Но можно добавить легкий фон, если хочется */
-      }
-
-      /* Заголовок статьи */
       .article-header {
         text-align: center;
         margin-bottom: 40px;
@@ -207,7 +193,7 @@
 
       h1.title {
         font-family: var(--font-heading);
-        font-size: clamp(2rem, 5vw, 3rem); /* Адаптивный размер */
+        font-size: clamp(2rem, 5vw, 3rem);
         line-height: 1.15;
         margin: 0 0 24px 0;
         font-weight: 900;
@@ -227,7 +213,6 @@
         margin-bottom: 32px;
       }
 
-      /* Геро-изображение (Квантовая анимация) */
       .hero-visual {
         width: 100%;
         height: 360px;
@@ -239,7 +224,6 @@
         box-shadow: var(--shadow);
       }
       
-      /* CSS Анимация "Квантовое поле" */
       .quantum-orb {
         position: absolute;
         top: 50%;
@@ -288,9 +272,8 @@
         100% { transform: translate(-50%, -50%) rotate(360deg); }
       }
 
-      /* Текст статьи */
       article.content {
-        font-size: 1.125rem; /* 18px */
+        font-size: 1.125rem;
         color: var(--text-main);
       }
       
@@ -298,7 +281,6 @@
         margin-bottom: 1.8em;
       }
       
-      /* Первая буква (Буквица) */
       article.content > p:first-of-type::first-letter {
         float: left;
         font-family: var(--font-heading);
@@ -319,7 +301,6 @@
         padding-left: 20px;
       }
       
-      /* Декор заголовков */
       article.content h2::before {
         content: '';
         position: absolute;
@@ -349,9 +330,9 @@
         font-weight: bold;
       }
 
-      /* Футер статьи */
       .article-footer {
         margin-top: 60px;
+        margin-bottom: 60px;
         padding: 30px;
         background: var(--card-bg);
         border: 1px solid var(--card-border);
@@ -384,7 +365,139 @@
         color: white;
       }
 
-      /* Адаптивность */
+      .comments-section {
+        margin-top: 40px;
+        border-top: 1px solid rgba(128,128,128, 0.15);
+        padding-top: 40px;
+      }
+
+      .comments-header {
+        font-family: var(--font-heading);
+        font-size: 1.5rem;
+        margin-bottom: 30px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      
+      .comment-count {
+        background: rgba(128,128,128, 0.1);
+        font-family: var(--font-body);
+        font-size: 0.9rem;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-weight: 600;
+        color: var(--text-muted);
+      }
+
+      .comment-form {
+        background: var(--card-bg);
+        padding: 24px;
+        border-radius: var(--radius);
+        border: 1px solid var(--card-border);
+        margin-bottom: 40px;
+      }
+
+      .form-group {
+        margin-bottom: 16px;
+      }
+
+      .form-input, .form-textarea {
+        width: 100%;
+        background: var(--input-bg);
+        border: 1px solid rgba(128,128,128, 0.2);
+        padding: 12px 16px;
+        border-radius: 8px;
+        color: var(--text-main);
+        font-family: var(--font-body);
+        font-size: 0.95rem;
+        transition: border-color 0.2s, box-shadow 0.2s;
+      }
+      
+      .form-input:focus, .form-textarea:focus {
+        outline: none;
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px var(--accent-glow);
+      }
+
+      .form-textarea {
+        min-height: 100px;
+        resize: vertical;
+      }
+
+      .submit-btn {
+        background: var(--accent);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .submit-btn:hover {
+        filter: brightness(1.1);
+      }
+
+      .comment-list {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .comment-card {
+        display: flex;
+        gap: 16px;
+        animation: slideIn 0.4s ease;
+      }
+
+      @keyframes slideIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      .avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #e0e0e0, #b0b0b0);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        color: #fff;
+        font-size: 0.9rem;
+        flex-shrink: 0;
+        text-transform: uppercase;
+      }
+
+      .comment-body {
+        flex: 1;
+      }
+
+      .comment-meta {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 6px;
+      }
+
+      .comment-author {
+        font-weight: 700;
+        font-size: 0.95rem;
+      }
+
+      .comment-time {
+        color: var(--text-muted);
+        font-size: 0.8rem;
+      }
+
+      .comment-text {
+        color: var(--text-main);
+        font-size: 0.95rem;
+        line-height: 1.5;
+      }
+
       @media (max-width: 600px) {
         .container { padding: 20px 16px 60px; }
         h1.title { font-size: 1.8rem; }
@@ -523,13 +636,28 @@
           </button>
         </footer>
 
+        <section class="comments-section fade-in-up">
+          <div class="comments-header">
+            Обсуждение <span class="comment-count" id="commentCount">0</span>
+          </div>
+
+          <div class="comment-form">
+            <div class="form-group">
+              <input type="text" id="commentName" class="form-input" placeholder="Ваше имя" />
+            </div>
+            <div class="form-group">
+              <textarea id="commentText" class="form-textarea" placeholder="Присоединиться к обсуждению..."></textarea>
+            </div>
+            <button id="submitComment" class="submit-btn">Отправить</button>
+          </div>
+
+          <div class="comment-list" id="commentList"></div>
+        </section>
+
       </main>
     </div>
 
     <script>
-      // --- Логика интерфейса ---
-      
-      // 1. Анимация при скролле (Intersection Observer)
       const observerOptions = {
         threshold: 0.1,
         rootMargin: "0px 0px -50px 0px"
@@ -539,7 +667,7 @@
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add("visible");
-            observer.unobserve(entry.target); // Анимируем только один раз
+            observer.unobserve(entry.target);
           }
         });
       }, observerOptions);
@@ -548,7 +676,6 @@
         observer.observe(el);
       });
 
-      // 2. Прогресс бар
       const progressBar = document.getElementById("progress");
       window.addEventListener("scroll", () => {
         const docHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -556,11 +683,9 @@
         progressBar.style.width = `${scrolled}%`;
       });
 
-      // 3. Переключение темы
       const themeBtn = document.getElementById("toggleTheme");
       const html = document.documentElement;
       
-      // Проверка сохраненной темы
       if(localStorage.getItem("theme") === "dark") {
         html.setAttribute("data-theme", "dark");
       }
@@ -575,7 +700,6 @@
         }
       });
 
-      // 4. Кнопка поделиться
       document.getElementById("shareBtn").addEventListener("click", async () => {
         const shareData = {
           title: document.title,
@@ -586,15 +710,109 @@
         if (navigator.share) {
             try { await navigator.share(shareData); } catch(e) {}
         } else {
-            // Fallback: копирование в буфер
             navigator.clipboard.writeText(window.location.href);
             alert("Ссылка скопирована!");
         }
       });
       
-      // 5. Установка текущего года
       const year = new Date().getFullYear();
       document.getElementById("publishedDate").innerText = `14 ноября ${year}, Квебек`;
+
+      const fakeComments = [
+        {
+          name: "Dmitry K.",
+          text: "Странно, что ноутбук остался открытым. Обычно при 'давлении извне' люди либо зачищают всё, либо забирают с собой. Больше похоже на инсценировку.",
+          time: "3 часа назад",
+          color: "#e11d48"
+        },
+        {
+          name: "Sarah Connor",
+          text: "Я живу недалеко от кампуса. В ту ночь там действительно было необычно тихо, даже патрулей охраны не было видно. Надеюсь, его найдут живым.",
+          time: "5 часов назад",
+          color: "#2563eb"
+        },
+        {
+          name: "QuantumFan",
+          text: "Технология TWPA стоит миллиарды долларов в перспективе. Это чистый промышленный шпионаж. Ищите след корпораций, а не несчастный случай.",
+          time: "12 часов назад",
+          color: "#059669"
+        },
+        {
+          name: "Аноним",
+          text: "Гений из села... Какая вдохновляющая и трагичная история одновременно. Держись, хлопец!",
+          time: "1 день назад",
+          color: "#7c3aed"
+        }
+      ];
+
+      const commentListEl = document.getElementById("commentList");
+      const commentCountEl = document.getElementById("commentCount");
+      const nameInput = document.getElementById("commentName");
+      const textInput = document.getElementById("commentText");
+      const submitBtn = document.getElementById("submitComment");
+
+      function loadComments() {
+        let comments = JSON.parse(localStorage.getItem("comments_data"));
+        if (!comments || comments.length === 0) {
+          comments = fakeComments;
+          localStorage.setItem("comments_data", JSON.stringify(comments));
+        }
+        return comments;
+      }
+
+      function renderComments() {
+        const comments = loadComments();
+        commentListEl.innerHTML = "";
+        commentCountEl.innerText = comments.length;
+
+        comments.forEach(comment => {
+          const div = document.createElement("div");
+          div.className = "comment-card";
+          
+          const initials = comment.name.slice(0, 2).toUpperCase();
+          const color = comment.color || "#666";
+
+          div.innerHTML = `
+            <div class="avatar" style="background: ${color}">${initials}</div>
+            <div class="comment-body">
+              <div class="comment-meta">
+                <span class="comment-author">${comment.name}</span>
+                <span class="comment-time">${comment.time}</span>
+              </div>
+              <div class="comment-text">${comment.text}</div>
+            </div>
+          `;
+          commentListEl.appendChild(div);
+        });
+      }
+
+      submitBtn.addEventListener("click", () => {
+        const name = nameInput.value.trim() || "Гость";
+        const text = textInput.value.trim();
+        
+        if (!text) {
+          alert("Пожалуйста, введите текст комментария");
+          return;
+        }
+
+        const newComment = {
+          name: name,
+          text: text,
+          time: "Только что",
+          color: "#" + Math.floor(Math.random()*16777215).toString(16)
+        };
+
+        const comments = loadComments();
+        comments.unshift(newComment); 
+        localStorage.setItem("comments_data", JSON.stringify(comments));
+        
+        renderComments();
+        
+        textInput.value = "";
+        nameInput.value = "";
+      });
+
+      renderComments();
 
     </script>
   </body>
