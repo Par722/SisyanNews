@@ -271,6 +271,52 @@
       @keyframes ring-spin {
         100% { transform: translate(-50%, -50%) rotate(360deg); }
       }
+      
+      /* CCTV Стили */
+      .cctv-container {
+        margin: 40px 0;
+        position: relative;
+        border-radius: var(--radius);
+        overflow: hidden;
+        box-shadow: var(--shadow);
+      }
+      .cctv-image {
+        width: 100%;
+        display: block;
+        transform: scale(1.02);
+        filter: contrast(1.1) grayscale(20%);
+      }
+      .cctv-overlay {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: rgba(0,0,0,0.7);
+        color: white;
+        padding: 4px 10px;
+        border-radius: 4px;
+        font-family: monospace;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .rec-dot {
+        width: 10px;
+        height: 10px;
+        background: red;
+        border-radius: 50%;
+        animation: blink 1s infinite;
+      }
+      @keyframes blink {
+        50% { opacity: 0; }
+      }
+      .cctv-caption {
+        text-align: center;
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        margin-top: 12px;
+        font-style: italic;
+      }
 
       article.content {
         font-size: 1.125rem;
@@ -570,8 +616,20 @@
               По данным канадской полиции, молодой учёный исчез днём 14 ноября,
               покинув лабораторный кампус Университета Лаваля. Последние записи с
               камер наблюдения фиксируют, как он в одиночку выходит из корпуса
-              исследований криогенных систем. С тех пор его следов не найдено.
+              исследований криогенных систем.
             </p>
+
+            <div class="cctv-container">
+              <img src="cctv.jpg" alt="Снимок с камеры наблюдения" class="cctv-image" />
+              <div class="cctv-overlay">
+                <div class="rec-dot"></div>
+                REC 16:58:15
+              </div>
+            </div>
+            <div class="cctv-caption">
+              Последний известный кадр: Сисян О. покидает территорию лаборатории.
+            </div>
+            <p>С тех пор его следов не найдено.</p>
           </div>
 
           <div class="fade-in-up">
@@ -764,10 +822,11 @@
       const submitBtn = document.getElementById("submitComment");
 
       function loadComments() {
-        let comments = JSON.parse(localStorage.getItem("comments_data"));
+        // ОБНОВЛЕННЫЙ КЛЮЧ 'ny_comments_v3' ЧТОБЫ СБРОСИТЬ СТАРЫЕ ДАННЫЕ
+        let comments = JSON.parse(localStorage.getItem("ny_comments_v3"));
         if (!comments || comments.length === 0) {
           comments = fakeComments;
-          localStorage.setItem("comments_data", JSON.stringify(comments));
+          localStorage.setItem("ny_comments_v3", JSON.stringify(comments));
         }
         return comments;
       }
@@ -810,12 +869,12 @@
           name: name,
           text: text,
           time: "Только что",
-          color: "#" + Math.floor(Math.random()*16777215).toString(16) // Случайный цвет аватарки
+          color: "#" + Math.floor(Math.random()*16777215).toString(16)
         };
 
         const comments = loadComments();
         comments.unshift(newComment); 
-        localStorage.setItem("comments_data", JSON.stringify(comments));
+        localStorage.setItem("ny_comments_v3", JSON.stringify(comments));
         
         renderComments();
         
@@ -823,7 +882,6 @@
         nameInput.value = "";
       });
 
-      // Инициализация комментариев при загрузке
       renderComments();
 
     </script>
